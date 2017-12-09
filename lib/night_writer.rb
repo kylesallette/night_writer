@@ -43,5 +43,5 @@ class NightWriter
     end
     @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join + "\n")
   end
-
+binding.pry
 end
