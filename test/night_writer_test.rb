@@ -12,8 +12,7 @@ class NightWriterTest < Minitest::test
     night.read_file("Hello")
 
     assert_equal "hello", night.input
-
-
   end
+  de
 
-end 
+end
