@@ -22,6 +22,7 @@ class NightWriter
 
   def write_file
     File.open(output ,'w') { |file| file.write(text)}
+    puts "Created #{output} containing #{text.length} characters"
   end
 
   def convert_eng_to_braille
@@ -35,7 +36,7 @@ class NightWriter
     line_1 = []
     line_2 = []
     line_3 = []
-    converted = convert_eng_to_braille
+    converted = convert_eng_to_braille.flatten
     converted.map do |letter|
       line_1.push(letter[0..1])
       line_2.push(letter[2..3])

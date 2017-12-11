@@ -1,5 +1,5 @@
 require 'pry'
-require_relative 'library'
+require_relative 'library_2'
 
 
 class NightReader
@@ -9,12 +9,14 @@ class NightReader
               :text
 
   def initialize
-    @library = Library.new
+    @input = ARGV[0]
+    @output = ARGV[1]
+    @library = Library2.new
     @text = text
   end
 
-  def read_file(file)
-    @text = File.read(file)
+  def read_file
+    @text = File.read(input)
   end
 
   def write_file(file)
@@ -33,12 +35,19 @@ class NightReader
   end
 
   def split_every_six
+    converted = []
     @text = convert_braille_to_eng
-    new_text = text.strip.scan(/.{6}/)
-    new_letters = new_text.map do |letter|
-    @library.alphabet.invert[letter]
-    end
-    p new_letters.join("")
+    new_text = text.chars.each_slice(6).map(&:join)
+      new_text.each_with_index.map do |x,i|
+        if x == ".....0"
+          x + x[i + 1]
+        end
+      end
+    new_text.map do |letter|
+      converted << @library.alphabet.invert[letter]
+     end
+     converted.join("")
+
   end
   binding.pry
 end
