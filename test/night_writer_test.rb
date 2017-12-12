@@ -45,6 +45,12 @@ class NightWriterTest < Minitest::Test
     expected = [[".....0","0....."], [".....0", "0.0..."]]
     assert_equal expected, @night.convert_eng_to_braille("AB")
   end
-
-
+  def test_it_can_space_lower_case
+    expected = ["0.....", "......","0.0..."]
+    assert_equal expected, @night.convert_eng_to_braille("a b")
+  end
+   def test_it_can_space_upper_case
+     expected = [[".....0", "0....."], "......", [".....0", "00...."]]
+     assert_equal expected, @night.convert_eng_to_braille("A C")
+   end
 end
