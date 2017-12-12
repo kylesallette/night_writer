@@ -40,16 +40,14 @@ class NightReader
     converted = []
     @text = convert_braille_to_eng(text)
     new_text = text.chars.each_slice(6).map(&:join)
-    poop = new_text.each_with_index.map do |x,i|
-        if x == ".....0"
-          x + new_text[i + 1]
-
-        else
-          x
-
-        end
+    added_text = new_text.each_with_index.map do |x,i|
+      if x == ".....0"
+        x + new_text[i + 1]
+      else
+        x
       end
-    poop.map do |letter|
+    end
+    added_text.map do |letter|
      converted << @library.alphabet.invert[letter]
      end
     @text = converted.join("")
@@ -57,7 +55,3 @@ class NightReader
    end
 
 end
-
-#night = NightReader.new
-#night.read_file("../message.txt")
-#night.convert_braille_to_eng
