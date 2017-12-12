@@ -1,5 +1,5 @@
 require 'pry'
-require_relative 'library_2'
+require_relative 'braille_to_eng_library'
 
 
 class NightReader
@@ -17,13 +17,15 @@ class NightReader
 
   def read_file
     @text = File.read(input)
+    split_every_six
   end
 
-  def write_file(file)
-    File.open(output, 'w') { |file| file.write(file)}
+  def write_file
+    File.open(output, 'w') { |file| file.write(text)}
+    puts "Created #{output} containing #{text.length} characters"
   end
 
-  def convert_braille_to_eng
+  def convert_braille_to_eng(text)
     split_text = text.split("\n")
     result = ""
       until split_text[0].empty?
@@ -36,20 +38,24 @@ class NightReader
 
   def split_every_six
     converted = []
-    @text = convert_braille_to_eng
+    @text = convert_braille_to_eng(text)
     new_text = text.chars.each_slice(6).map(&:join)
-      new_text.each_with_index.map do |x,i|
+    poop = new_text.each_with_index.map do |x,i|
         if x == ".....0"
-          x + x[i + 1]
+          x + new_text[i + 1]
+
+        else
+          x
+
         end
       end
-    new_text.map do |letter|
-      converted << @library.alphabet.invert[letter]
+    poop.map do |letter|
+     converted << @library.alphabet.invert[letter]
      end
-     converted.join("")
+    @text = converted.join("")
+    write_file
+   end
 
-  end
-  binding.pry
 end
 
 #night = NightReader.new
