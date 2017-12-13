@@ -1,4 +1,4 @@
-class Library2
+class BrailleToEngLibrary
 
   attr_reader :alphabet
 
