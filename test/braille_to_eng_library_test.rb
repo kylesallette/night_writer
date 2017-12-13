@@ -3,7 +3,7 @@ require 'minitest/pride'
 require_relative '../lib/braille_to_eng_library'
 
 
-class LibraryTest < Minitest::Test
+class BrailleToEngLibraryTest < Minitest::Test
 
 
   def setup
