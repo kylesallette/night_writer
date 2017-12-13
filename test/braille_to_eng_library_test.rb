@@ -7,11 +7,11 @@ class BrailleToEngLibraryTest < Minitest::Test
 
 
   def setup
-    @library = Library2.new
+    @library = BrailleToEngLibrary.new
   end
 
   def test_it_exists
-    assert_instance_of Library2, @library
+    assert_instance_of BrailleToEngLibrary, @library
   end
 
 end
