@@ -6,13 +6,16 @@ class NightWriter
 
   attr_reader :input,
               :output,
-              :text
+              :text,
+              :data
+
 
   def initialize
     @input = ARGV[0]
     @output = ARGV[1]
     @library = Library.new
     @text = text
+    @data = []
   end
 
 
@@ -34,16 +37,16 @@ class NightWriter
   end
 
   def split_braille_lines(text)
-    line_1 = []
-    line_2 = []
-    line_3 = []
+    line_1, line_2, line_3 = [], [], []
     converted = convert_eng_to_braille(text).flatten
     converted.map do |letter|
       line_1.push(letter[0..1])
       line_2.push(letter[2..3])
       line_3.push(letter[4..5])
     end
-    @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join + "\n")
+    @data << line_1.slice!(80..-1) << line_2.slice!(80..-1) << line_3.slice!(80..-1)
+    @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join + "\n\n" +
+    data[0].join + "\n" + data[1].join + "\n" + data[2].join)
     write_file
   end
 
