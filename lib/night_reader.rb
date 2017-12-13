@@ -8,19 +8,21 @@ class NightReader
                 :output,
                 :converted
 
-  attr_accessor :text
+  attr_accessor :text,
+                :data
 
   def initialize
     @input = ARGV[0]
     @output = ARGV[1]
     @library = Library2.new
-    @text = text
     @converted = []
+    @text = text
+    @data = data
   end
 
   def read_file
-    @text = File.read(input)
-    split_every_six
+    @data = File.read(input)
+    split_every_six(data)
   end
 
   def write_file
@@ -28,8 +30,8 @@ class NightReader
     puts "Created #{output} containing #{text.length} characters"
   end
 
-  def split_braille
-    split_text = @text.split("\n")
+  def split_braille(data)
+    split_text = data.split("\n")
     result = ""
       until split_text[0].empty?
         split_text.each do |line|
@@ -39,8 +41,8 @@ class NightReader
      result
   end
 
-  def split_every_six
-    text = split_braille
+  def split_every_six(data)
+    text = split_braille(data)
     new_text = text.chars.each_slice(6).map(&:join)
     @text = new_text.map.with_index do |x,i|
       if x == ".....0"
