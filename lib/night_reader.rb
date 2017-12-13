@@ -69,6 +69,6 @@ class NightReader
     end
     @text = converted.join("")
     write_file
-   end
+  end
 
 end
