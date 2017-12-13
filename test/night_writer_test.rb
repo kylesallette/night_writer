@@ -24,16 +24,19 @@ class NightWriterTest < Minitest::Test
 
   def test_can_convert_five_letters
     expected = ["0.....", "0.0...", "00....", "00.0..", "0..0.."]
+
     assert_equal expected, @night.convert_eng_to_braille("abcde")
   end
 
   def test_can_convert_serperated_letters
     expected = ["0.....","......", "0.0..."]
+
     assert_equal expected, @night.convert_eng_to_braille("a b")
   end
 
   def test_can_convert_multiple_serperated_letters
     expected = ["0.....","......", "0.0...","......","00...."]
+
     assert_equal expected, @night.convert_eng_to_braille("a b c")
   end
 
@@ -43,14 +46,44 @@ class NightWriterTest < Minitest::Test
 
   def test_can_convert_multiple_capital_letters
     expected = [[".....0","0....."], [".....0", "0.0..."]]
+
     assert_equal expected, @night.convert_eng_to_braille("AB")
   end
+
   def test_it_can_space_lower_case
     expected = ["0.....", "......","0.0..."]
+
     assert_equal expected, @night.convert_eng_to_braille("a b")
   end
-   def test_it_can_space_upper_case
-     expected = [[".....0", "0....."], "......", [".....0", "00...."]]
-     assert_equal expected, @night.convert_eng_to_braille("A C")
-   end
+
+  def test_it_can_space_upper_case
+    expected = [[".....0", "0....."], "......", [".....0", "00...."]]
+
+    assert_equal expected, @night.convert_eng_to_braille("A C")
+  end
+
+  def test_it_can_take_all_upcase
+    expected = [[".....0", "0....."], [".....0", "0....."]]
+
+    assert_equal expected, @night.convert_eng_to_braille("AA")
+  end
+
+  def test_just_space
+    expected = []
+
+    assert_equal expected, @night.convert_eng_to_braille("  ")
+  end
+
+  def test_symbols
+    expected = ["..000.", "..000."]
+
+    assert_equal expected, @night.convert_eng_to_braille("!!")
+  end
+
+  def test_symbols_and_letters
+    expected = ["..000.", "0....."]
+
+    assert_equal expected, @night.convert_eng_to_braille("!a")
+  end
+
 end
