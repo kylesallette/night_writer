@@ -9,11 +9,10 @@ class NightWriter
               :text,
               :data
 
-
   def initialize
     @input = ARGV[0]
     @output = ARGV[1]
-    @library = Library.new
+    @library = EngToBrailleLibrary.new
     @text = text
     @data = []
   end
@@ -44,9 +43,17 @@ class NightWriter
       line_2.push(letter[2..3])
       line_3.push(letter[4..5])
     end
-    @data << line_1.slice!(80..-1) << line_2.slice!(80..-1) << line_3.slice!(80..-1)
-    @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join + "\n\n" +
-    data[0].join + "\n" + data[1].join + "\n" + data[2].join)
+   @data << line_1.slice!(80..-1) << line_2.slice!(80..-1) << line_3.slice!(80..-1)
+   @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join)
+    wrap_lines_over_80
+  end
+
+  def wrap_lines_over_80
+    if data[0] != nil
+      new_text = @text.split("\n")
+      @text =  (new_text[0] + "\n" + new_text[1] + "\n" + new_text[2] + "\n\n" +
+      data[0].join + "\n" + data[1].join + "\n" + data[2].join)
+    end
     write_file
   end
 

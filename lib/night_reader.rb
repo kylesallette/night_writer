@@ -14,7 +14,7 @@ class NightReader
   def initialize
     @input = ARGV[0]
     @output = ARGV[1]
-    @library = Library2.new
+    @library = BrailleToEngLibrary.new
     @converted = []
     @text = text
     @data = data
