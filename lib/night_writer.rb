@@ -43,7 +43,7 @@ class NightWriter
       line_2.push(letter[2..3])
       line_3.push(letter[4..5])
     end
-   @data <<line_1.slice!(80..-1)<< line_2.slice!(80..-1)<< line_3.slice!(80..-1)
+   @data <<line_1.slice!(40..-1)<< line_2.slice!(40..-1)<< line_3.slice!(40..-1)
    @text = (line_1.join + "\n" + line_2.join + "\n" + line_3.join)
     wrap_lines_over_80
   end
