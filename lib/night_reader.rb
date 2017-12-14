@@ -6,9 +6,8 @@ class NightReader
 
   attr_reader   :input,
                 :output,
-                :converted
-
-  attr_accessor :text,
+                :converted,
+                :text,
                 :data
 
   def initialize
